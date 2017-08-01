@@ -106,8 +106,8 @@ $nix/bin/nix-env --version
 [ $? -ne 0 ] && exit 1
 
 echo "Success. To proceed you may want to set"
-echo 'export PATH=$HOME/nix-boot/bin:$PATH'
-echo 'export PKG_CONFIG_PATH=$HOME/nix-boot/lib/pkgconfig:$PKG_CONFIG_PATH'
+echo 'export PATH="$HOME/nix-boot/bin:$PATH"'
+echo 'export PKG_CONFIG_PATH="$HOME/nix-boot/lib/pkgconfig:$PKG_CONFIG_PATH"'
 echo 'export LDFLAGS="-L$HOME/nix-boot/lib $LDFLAGS"'
 echo 'export CPPFLAGS="-I$HOME/nix-boot/include $CPPFLAGS"'
 echo 'export PERL5OPT="-I$HOME/nix-boot/lib/perl -I$HOME/nix-boot/lib64/perl5 -I$HOME/nix-boot/lib/perl5 -I$HOME/nix-boot/lib/perl5/site_perl"'
