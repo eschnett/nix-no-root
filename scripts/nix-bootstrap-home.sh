@@ -3,8 +3,8 @@
 # This script creates a working nix in $HOME, as described on
 # https://nixos.org/wiki/How_to_install_nix_in_home_%28on_another_distribution%29
 
-mkdir -p ~/nix-boot
-cd ~/nix-boot
+mkdir -p $HOME/nix-boot
+cd $HOME/nix-boot
 
 if [ ! -e nix-1.11.3.tar.xz ] ; then
 wget http://nixos.org/releases/nix/nix-1.11.3/nix-1.11.3.tar.xz
