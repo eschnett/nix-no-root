@@ -15,6 +15,9 @@ fi
 if [ ! -e curl-7.35.0.tar.lzma ] ; then
 wget http://curl.haxx.se/download/curl-7.35.0.tar.lzma
 fi
+if [ ! -e libseccomp-2.3.2.tar.gz ] ; then
+wget https://github.com/seccomp/libseccomp/releases/download/v2.3.2/libseccomp-2.3.2.tar.gz
+fi
 if [ ! -e sqlite-autoconf-3080300.tar.gz ] ; then
 wget http://www.sqlite.org/2014/sqlite-autoconf-3080300.tar.gz
 fi
@@ -45,12 +48,20 @@ if [ ! -e $nix/lib/libbz2.so.1.0.6 ]; then
   cp libbz2.so.1.0 libbz2.so.1.0.6 $HOME/nix-boot/lib
 fi
 
-
 if [ ! -e $nix/bin/curl ]; then
    cd $nix
    lzma -d curl*.lzma
    tar xvf curl*tar
    cd curl-*
+   ./configure --prefix=$nix
+   make
+   make install
+fi
+
+if [ ! -e $nix/bin/scmp_sys_resolver ]; then
+   cd $nix
+   tar xvzf libseccomp*tar.gz
+   cd libseccomp-*
    ./configure --prefix=$nix
    make
    make install
