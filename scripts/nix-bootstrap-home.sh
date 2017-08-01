@@ -6,8 +6,8 @@
 mkdir -p $HOME/nix-boot
 cd $HOME/nix-boot
 
-if [ ! -e nix-1.11.3.tar.xz ] ; then
-wget http://nixos.org/releases/nix/nix-1.11.3/nix-1.11.3.tar.xz
+if [ ! -e nix-1.11.13.tar.xz ] ; then
+wget http://nixos.org/releases/nix/nix-1.11.13/nix-1.11.13.tar.xz
 fi
 if [ ! -e bzip2-1.0.6.tar.gz ] ; then
 wget http://bzip.org/1.0.6/bzip2-1.0.6.tar.gz
