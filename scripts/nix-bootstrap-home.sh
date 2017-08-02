@@ -3,16 +3,16 @@
 # This script creates a working nix in $HOME, as described on
 # https://nixos.org/wiki/How_to_install_nix_in_home_%28on_another_distribution%29
 
-nix=$HOME/nix-boot
+nix="$HOME/nix-boot"
 
-export PATH=$nix/bin:$PATH
-export PKG_CONFIG_PATH=$nix/lib/pkgconfig:$PKG_CONFIG_PATH
+export PATH="$nix/bin:$PATH"
+export PKG_CONFIG_PATH="$nix/lib/pkgconfig:$PKG_CONFIG_PATH"
 export LDFLAGS="-L$nix/lib $LDFLAGS"
 export CPPFLAGS="-I$nix/include $CPPFLAGS"
 export PERL5OPT="-I$nix/lib/perl -I$nix/lib64/perl5 -I$nix/lib/perl5 -I$nix/lib/perl5/site_perl"
 
-mkdir -p $nix
-cd $nix
+mkdir -p "$nix"
+cd "$nix"
 
 if [ ! -e nix-1.11.13.tar.xz ]; then
 wget http://nixos.org/releases/nix/nix-1.11.13/nix-1.11.13.tar.xz
@@ -40,90 +40,90 @@ if [ ! -e WWW-Curl-4.17.tar.gz ]; then
 wget --no-check-certificate https://pkgs.fedoraproject.org/repo/pkgs/perl-WWW-Curl/WWW-Curl-4.17.tar.gz/997ac81cd6b03b30b36f7cd930474845/WWW-Curl-4.17.tar.gz
 fi
 
-if [ ! -e $nix/lib/libbz2.so.1.0.6 ]; then
+if [ ! -e "$nix/lib/libbz2.so.1.0.6" ]; then
   tar xvzf bzip2-1.0.6.tar.gz
   cd bzip2*
   make -f Makefile-libbz2_so
-  make install PREFIX=$HOME/nix-boot
+  make install PREFIX="$nix"
   cp libbz2.so.1.0 libbz2.so.1.0.6 $nix/lib
-  cd $nix
+  cd "$nix"
 fi
 
-if [ ! -e $nix/bin/curl ]; then
+if [ ! -e "$nix/bin/curl" ]; then
    lzma -d curl*.lzma
    tar xvf curl*.tar
    rm curl*.tar
    cd curl-*
-   ./configure --prefix=$nix
+   ./configure --prefix="$nix"
    make
    make install
-   cd $nix
+   cd "$nix"
 fi
 
-if [ ! -e $nix/bin/scmp_sys_resolver ]; then
+if [ ! -e "$nix/bin/scmp_sys_resolver" ]; then
    tar xvzf libseccomp*tar.gz
    cd libseccomp-*
-   ./configure --prefix=$nix
+   ./configure --prefix="$nix"
    make
    make install
-   cd $nix
+   cd "$nix"
 fi
 
-if [ ! -e $nix/bin/sqlite3 ]; then
+if [ ! -e "$nix/bin/sqlite3" ]; then
    tar xvzf sqlite*tar.gz
    cd sqlite-*
-   ./configure --prefix=$nix
+   ./configure --prefix="$nix"
    make
    make install
-   cd $nix
+   cd "$nix"
 fi
 
-if [ ! -e $nix/bin/dbiproxy ]; then
+if [ ! -e "$nix/bin/dbiproxy" ]; then
   tar xvzf DBI-*.tar.gz 
   cd DBI-*
-  perl Makefile.PL PREFIX=$HOME/nix-boot
+  perl Makefile.PL PREFIX="$nix"
   make
   make install
-  cd $nix
+  cd "$nix"
 fi
 
-if [ ! -e $nix/lib64/perl5/DBD/SQLite.pm ]; then
+if [ ! -e "$nix/lib64/perl5/DBD/SQLite.pm" ]; then
   tar xvzf DBD-SQLite-*.gz
   cd DBD-*
-  perl Makefile.PL PREFIX=$HOME/nix-boot
+  perl Makefile.PL PREFIX="$nix"
   make
   make install
-  cd $nix
+  cd "$nix"
 fi
 
-if [ ! -e $nix/lib64/perl5/WWW/Curl.pm ]; then
+if [ ! -e "$nix/lib64/perl5/WWW/Curl.pm" ]; then
   tar xvzf WWW-Curl-*.gz
   cd WWW-*
-  perl Makefile.PL PREFIX=$HOME/nix-boot
+  perl Makefile.PL PREFIX="$nix"
   make
   make install
-  cd $nix
+  cd "$nix"
 fi
 
-if [ ! -e $nix/bin/nix-env ]; then
+if [ ! -e "$nix/bin/nix-env" ]; then
   xz -d nix-*xz
   tar xvf nix-*.tar
   rm nix-*.tar
   cd nix-*
-  ./configure --prefix=$HOME/nix-boot --with-store-dir=$HOME/nix/store --localstatedir=$HOME/nix/var
+  ./configure --prefix="$nix" --with-store-dir="$nix/store" --localstatedir="$nix/var"
   make
   make install
-  cd $nix
+  cd "$nix"
 fi
 
 $nix/bin/nix-env --version
 [ $? -ne 0 ] && exit 1
 
 echo "Success. To proceed you may want to set"
-echo 'export PATH="$HOME/nix-boot/bin:$PATH"'
-echo 'export PKG_CONFIG_PATH="$HOME/nix-boot/lib/pkgconfig:$PKG_CONFIG_PATH"'
-echo 'export LDFLAGS="-L$HOME/nix-boot/lib $LDFLAGS"'
-echo 'export CPPFLAGS="-I$HOME/nix-boot/include $CPPFLAGS"'
-echo 'export PERL5OPT="-I$HOME/nix-boot/lib/perl -I$HOME/nix-boot/lib64/perl5 -I$HOME/nix-boot/lib/perl5 -I$HOME/nix-boot/lib/perl5/site_perl"'
+echo 'export PATH="$nix/bin:$PATH"'
+echo 'export PKG_CONFIG_PATH="$nix/lib/pkgconfig:$PKG_CONFIG_PATH"'
+echo 'export LDFLAGS="-L$nix/lib $LDFLAGS"'
+echo 'export CPPFLAGS="-I$nix/include $CPPFLAGS"'
+echo 'export PERL5OPT="-I$nix/lib/perl -I$nix/lib64/perl5 -I$nix/lib/perl5 -I$nix/lib/perl5/site_perl"'
 echo '  and follow https://nixos.org/wiki/How_to_install_nix_in_home_%28on_another_distribution%29'
 
