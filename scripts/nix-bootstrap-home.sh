@@ -52,6 +52,7 @@ if [ ! -e $nix/bin/curl ]; then
    cd $nix
    lzma -d curl*.lzma
    tar xvf curl*tar
+   rm curl*tar
    cd curl-*
    ./configure --prefix=$nix
    make
@@ -107,6 +108,7 @@ if [ ! -e $nix/bin/nix-env ] ; then
   cd $nix
   xz -d nix-*xz
   tar xvf nix-*.tar
+  rm nix-*.tar
   cd nix-*
   ./configure --prefix=$HOME/nix-boot --with-store-dir=$HOME/nix/store --localstatedir=$HOME/nix/var
   make
