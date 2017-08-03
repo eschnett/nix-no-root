@@ -9,7 +9,7 @@ export PATH="$nix/bin:$PATH"
 export PKG_CONFIG_PATH="$nix/lib/pkgconfig:$PKG_CONFIG_PATH"
 export LDFLAGS="-L$nix/lib $LDFLAGS"
 export CPPFLAGS="-I$nix/include $CPPFLAGS"
-export PERL5OPT="-I$nix/lib/perl -I$nix/lib64/perl5 -I$nix/lib/perl5 -I$nix/lib/perl5/site_perl"
+export PERL5OPT="-I$nix/lib/perl -I$nix/lib/x86_64-linux-gnu/perl -I$nix/lib64/perl5 -I$nix/lib/perl5 -I$nix/lib/perl5/site_perl"
 
 mkdir -p "$nix"
 cd "$nix"
