@@ -107,7 +107,7 @@ fi
 if [ ! -e "$nix/bin/nix-env" ]; then
   xzcat nix-*xz | tar xvf -
   cd nix-*
-  ./configure --prefix="$nix" --with-store-dir="$NIXROOT/store" --localstatedir="$NIXROOT/var"
+  ./configure --prefix="$nix" --with-store-dir="$NIXROOT/nix/store" --localstatedir="$NIXROOT/nix/var"
   make
   make install
   cd "$nix"
