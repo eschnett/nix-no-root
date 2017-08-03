@@ -120,6 +120,6 @@ echo 'export PATH="$nix/bin:$PATH"'
 echo 'export PKG_CONFIG_PATH="$nix/lib/pkgconfig:$PKG_CONFIG_PATH"'
 echo 'export LDFLAGS="-L$nix/lib $LDFLAGS"'
 echo 'export CPPFLAGS="-I$nix/include $CPPFLAGS"'
-echo 'export PERL5OPT="-I$nix/lib/perl -I$nix/lib64/perl5 -I$nix/lib/perl5 -I$nix/lib/perl5/site_perl"'
+echo 'export PERL5OPT="-I$nix/lib/perl -I$nix/lib/x86_64-linux-gnu/perl -I$nix/lib64/perl5 -I$nix/lib/perl5 -I$nix/lib/perl5/site_perl"'
 echo '  and follow https://nixos.org/wiki/How_to_install_nix_in_home_%28on_another_distribution%29'
 
