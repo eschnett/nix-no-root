@@ -27,6 +27,9 @@ fi
 if [ ! -e libseccomp-2.3.2.tar.gz ]; then
 wget https://github.com/seccomp/libseccomp/releases/download/v2.3.2/libseccomp-2.3.2.tar.gz
 fi
+if [ ! -e xz-5.2.3.tar.bz2 ]; then
+wget https://tukaani.org/xz/xz-5.2.3.tar.bz2
+fi
 if [ ! -e sqlite-autoconf-3080300.tar.gz ]; then
 wget http://www.sqlite.org/2014/sqlite-autoconf-3080300.tar.gz
 fi
@@ -47,6 +50,15 @@ if [ ! -e "$nix/lib/libbz2.so.1.0.6" ]; then
   make -f Makefile-libbz2_so
   make install PREFIX="$nix"
   cp libbz2.so.1.0 libbz2.so.1.0.6 $nix/lib
+  cd "$nix"
+fi
+
+if [ ! -e "$nix/lib/liblzma.so.5.2.3" ]; then
+  bzcat xz-5.2.3.tar.bz2 | tar xvf -
+  cd xz-*
+  ./configure --prefix="$nix"
+  make
+  make install
   cd "$nix"
 fi
 
