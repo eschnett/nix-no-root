@@ -50,8 +50,7 @@ if [ ! -e "$nix/lib/libbz2.so.1.0.6" ]; then
 fi
 
 if [ ! -e "$nix/bin/curl" ]; then
-   lzma -d curl*.lzma
-   tar xvf curl*.tar
+   lzcat curl*.lzma | tar xvf -
    cd curl-*
    ./configure --prefix="$nix"
    make
@@ -105,8 +104,7 @@ if [ ! -e "$nix/lib64/perl5/WWW/Curl.pm" ]; then
 fi
 
 if [ ! -e "$nix/bin/nix-env" ]; then
-  xz -d nix-*xz
-  tar xvf nix-*.tar
+  xzcat nix-*xz | tar xvf -
   cd nix-*
   ./configure --prefix="$nix" --with-store-dir="$nix/store" --localstatedir="$nix/var"
   make
