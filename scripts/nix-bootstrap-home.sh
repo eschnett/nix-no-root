@@ -3,7 +3,8 @@
 # This script creates a working nix in $HOME, as described on
 # https://nixos.org/wiki/How_to_install_nix_in_home_%28on_another_distribution%29
 
-nix="$HOME/nix-boot"
+NIXROOT="$HOME"
+nix="$NIXROOT/nix-boot"
 
 export PATH="$nix/bin:$PATH"
 export PKG_CONFIG_PATH="$nix/lib/pkgconfig:$PKG_CONFIG_PATH"
@@ -106,7 +107,7 @@ fi
 if [ ! -e "$nix/bin/nix-env" ]; then
   xzcat nix-*xz | tar xvf -
   cd nix-*
-  ./configure --prefix="$nix" --with-store-dir="$nix/store" --localstatedir="$nix/var"
+  ./configure --prefix="$nix" --with-store-dir="$NIXROOT/store" --localstatedir="$NIXROOT/var"
   make
   make install
   cd "$nix"
